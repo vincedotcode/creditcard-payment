@@ -15,6 +15,11 @@ const Homepage = () => {
     errors: {}
   });
 
+  const createMockToken = (data) => {
+    return btoa(JSON.stringify(data));
+  };
+
+
   // Input field onChange handler
   const handleChange = ( e ) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -75,20 +80,19 @@ const Homepage = () => {
   } 
 
   // Form onSubmit handler
-  const handleSubmit = ( e ) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { name, number, expiry, security } = contact;
-
+  
     if (handleValidation()) {
+      const mockToken = createMockToken({ name, number, expiry, security });
+      console.log(mockToken);
+      const deepLinkUrl = `pocapp://payment?token=${mockToken}`;
+      console.log(deepLinkUrl);
       setContact({ ...contact, errors: {} });
-      console.log({
-        name,
-        number,
-        expiry,
-        security
-      });
     }
-  }
+  };
+  
 
   const { name, number, expiry, security, errors } = contact;
 
