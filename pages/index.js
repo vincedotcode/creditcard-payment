@@ -86,9 +86,8 @@ const Homepage = () => {
   
     if (handleValidation()) {
       const mockToken = createMockToken({ name, number, expiry, security });
-      console.log(mockToken);
       const deepLinkUrl = `pocapp://payment?token=${mockToken}`;
-      console.log(deepLinkUrl);
+      window.location.href = deepLinkUrl;
       setContact({ ...contact, errors: {} });
     }
   };
